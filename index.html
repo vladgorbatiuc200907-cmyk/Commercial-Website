@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MelodyShop – Instrumente Muzicale</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="responsive.css">
+</head>
+<body>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Descoperă <span class="highlight">muzica ta</span> cu instrumentul perfect</h1>
+      <p>Cele mai bune instrumente muzicale – de la chitări și piane, până la tobe și instrumente de suflat. Calitate garantată, prețuri accesibile.</p>
+      <div class="hero-btns">
+        <a href="produse.html" class="btn-primary">🎵 Explorează Produsele</a>
+        <a href="despre.html" class="btn-secondary">Află mai mult</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORII -->
+  <section class="section featured-section">
+    <div class="section-inner">
+      <div class="section-header">
+        <h2>Categorii de Instrumente</h2>
+        <p>Găsește instrumentul perfect pentru tine</p>
+        <div class="separator"></div>
+      </div>
+      <div class="categories">
+        <a href="produse.html?cat=chitari" class="cat-card">
+          <div class="cat-icon">🎸</div>
+          <div class="cat-name">Chitări</div>
+          <div class="cat-count">Acustice, Electrice, Clasice</div>
+        </a>
+        <a href="produse.html?cat=piane" class="cat-card">
+          <div class="cat-icon">🎹</div>
+          <div class="cat-name">Piane & Clape</div>
+          <div class="cat-count">Digitale, MIDI, Orgi</div>
+        </a>
+        <a href="produse.html?cat=tobe" class="cat-card">
+          <div class="cat-icon">🥁</div>
+          <div class="cat-name">Tobe & Percuție</div>
+          <div class="cat-count">Acustice, Electronice, Cajon</div>
+        </a>
+        <a href="produse.html?cat=vanturi" class="cat-card">
+          <div class="cat-icon">🎺</div>
+          <div class="cat-name">Instrumente de Suflat</div>
+          <div class="cat-count">Saxofon, Trompetă, Flaut</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUSE POPULARE -->
+  <section class="section featured-section alt">
+    <div class="section-inner">
+      <div class="section-header">
+        <h2>Produse Populare</h2>
+        <p>Alegerile preferate ale clienților noștri</p>
+        <div class="separator"></div>
+      </div>
+      <div class="cards-grid" id="produse-populare"></div>
+    </div>
+  </section>
+
+  <!-- PROMO BANNER -->
+  <section class="section" style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); padding: 60px 24px;">
+    <div class="section-inner" style="text-align: center; color: #fff;">
+      <h2 style="font-family: 'Playfair Display', serif; font-size: clamp(1.6rem,4vw,2.8rem); margin-bottom: 16px;">🎶 Oferte Speciale această Săptămână</h2>
+      <p style="opacity: 0.85; margin-bottom: 28px; font-size: 1.05rem;">Reduceri de până la 25% la produse selectate. Nu rata ocazia!</p>
+      <a href="produse.html" class="btn-primary">Vezi Ofertele</a>
+    </div>
+  </section>
+
+  <!-- NOUTĂȚI -->
+  <section class="section featured-section">
+    <div class="section-inner">
+      <div class="section-header">
+        <h2>Noutăți în Magazin</h2>
+        <p>Cele mai recente instrumente adăugate</p>
+        <div class="separator"></div>
+      </div>
+      <div class="cards-grid" id="produse-noi"></div>
+      <div style="text-align:center; margin-top: 40px;">
+        <a href="produse.html" class="btn-primary">Vezi Toate Produsele →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DE CE NOI -->
+  <section class="section featured-section alt">
+    <div class="section-inner">
+      <div class="section-header">
+        <h2>De Ce să Alegi MelodyShop?</h2>
+        <div class="separator"></div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4,1fr); gap: 24px;" class="why-grid">
+        <div class="value-card">
+          <div class="value-icon">🚚</div>
+          <h3>Livrare Rapidă</h3>
+          <p>Livrăm în toată România în 24-48 ore. Livrare gratuită peste 500 lei.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">✅</div>
+          <h3>Produse Certificate</h3>
+          <p>Toate instrumentele sunt originale, cu garanție de minimum 24 luni.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🔄</div>
+          <h3>Retur Gratuit</h3>
+          <p>30 de zile pentru returnare fără costuri suplimentare.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🎓</div>
+          <h3>Suport Expert</h3>
+          <p>Echipa noastră de muzicieni te ajută să alegi instrumentul potrivit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="produse.js"></script>
+<script src="utils.js"></script>
+<script src="layout.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Produse populare
+    const populare = produse.filter(p => p.popular).slice(0, 4);
+    document.getElementById('produse-populare').innerHTML = populare.map(createProductCard).join('');
+    
+    // Noutăți (ultimele 4 din array)
+    const noi = produse.slice(-4).reverse();
+    document.getElementById('produse-noi').innerHTML = noi.map(createProductCard).join('');
+  });
+  
+  // Responsive
+  const style = document.createElement('style');
+  style.textContent = `
+    @media (max-width: 992px) { .why-grid { grid-template-columns: repeat(2, 1fr) !important; } }
+    @media (max-width: 600px) { .why-grid { grid-template-columns: 1fr !important; } }
+  `;
+  document.head.appendChild(style);
+</script>
+</body>
+</html>

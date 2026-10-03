@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact – MelodyShop</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="responsive.css">
+</head>
+<body>
+
+<main>
+  <div class="page-title-bar">
+    <h1>📬 Contactează-ne</h1>
+    <p>Suntem aici să te ajutăm cu orice întrebare</p>
+  </div>
+
+  <div class="contact-layout">
+    <!-- CONTACT INFO -->
+    <div class="contact-info">
+      <h1>Hai să Vorbim!</h1>
+      <p>Indiferent dacă ai o întrebare despre un instrument, vrei o recomandare personalizată sau ai nevoie de suport post-vânzare, echipa noastră de muzicieni este gata să te ajute.</p>
+      
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div class="contact-item-text">
+          <h4>Adresă</h4>
+          <p>Str. Muzicii nr. 12, Sector 1<br>București, 010001, România</p>
+        </div>
+      </div>
+      
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div class="contact-item-text">
+          <h4>Telefon</h4>
+          <p>0721 234 567<br><small style="color:var(--text-muted);">Lun-Vin: 9:00-18:00 | Sâm: 10:00-14:00</small></p>
+        </div>
+      </div>
+      
+      <div class="contact-item">
+        <div class="contact-icon">✉️</div>
+        <div class="contact-item-text">
+          <h4>Email</h4>
+          <p>info@melodyshop.ro<br>comenzi@melodyshop.ro</p>
+        </div>
+      </div>
+      
+      <div class="contact-item">
+        <div class="contact-icon">🕐</div>
+        <div class="contact-item-text">
+          <h4>Program</h4>
+          <p>Luni – Vineri: 09:00 – 18:00<br>Sâmbătă: 10:00 – 14:00<br>Duminică: Închis</p>
+        </div>
+      </div>
+      
+      <div class="contact-map">
+        🗺️
+      </div>
+      
+      <div style="margin-top: 28px;">
+        <h4 style="margin-bottom: 12px; font-size: 0.875rem;">Urmărește-ne pe social media</h4>
+        <div class="footer-social">
+          <a href="#" class="social-btn" aria-label="Facebook" style="background: rgba(43,29,78,0.1);">📘</a>
+          <a href="#" class="social-btn" aria-label="Instagram" style="background: rgba(43,29,78,0.1);">📸</a>
+          <a href="#" class="social-btn" aria-label="YouTube" style="background: rgba(43,29,78,0.1);">📺</a>
+          <a href="#" class="social-btn" aria-label="TikTok" style="background: rgba(43,29,78,0.1);">🎵</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- CONTACT FORMULAR -->
+    <div class="contact-form-wrap">
+      <h2>Trimite-ne un Mesaj</h2>
+      
+      <div id="formSuccess" class="form-success">
+        <span>✅</span>
+        <strong>Mesaj trimis cu succes!</strong>
+        <p style="margin-top:8px; font-size:0.875rem; color: #2e7d32;">Îți mulțumim pentru mesaj! Te vom contacta în cel mult 24 de ore.</p>
+      </div>
+      
+      <form id="contactForm" novalidate>
+        <div class="form-row">
+          <div class="form-group" id="grpNume">
+            <label for="inpNume">Nume Complet *</label>
+            <input type="text" id="inpNume" placeholder="Ion Popescu" autocomplete="name">
+            <div class="form-error">Te rugăm să introduci numele tău.</div>
+          </div>
+          <div class="form-group" id="grpEmail">
+            <label for="inpEmail">Adresă Email *</label>
+            <input type="email" id="inpEmail" placeholder="ion@email.ro" autocomplete="email">
+            <div class="form-error">Te rugăm să introduci un email valid.</div>
+          </div>
+        </div>
+        
+        <div class="form-group" id="grpTel">
+          <label for="inpTel">Număr de Telefon</label>
+          <input type="tel" id="inpTel" placeholder="07XX XXX XXX" autocomplete="tel">
+        </div>
+        
+        <div class="form-group" id="grpSubiect">
+          <label for="inpSubiect">Subiect *</label>
+          <select id="inpSubiect">
+            <option value="">Selectează un subiect...</option>
+            <option>Informații despre un produs</option>
+            <option>Comandă și livrare</option>
+            <option>Retur și garanție</option>
+            <option>Suport tehnic</option>
+            <option>Colaborare / Parteneriat</option>
+            <option>Altele</option>
+          </select>
+          <div class="form-error">Te rugăm să selectezi un subiect.</div>
+        </div>
+        
+        <div class="form-group" id="grpMesaj">
+          <label for="inpMesaj">Mesajul Tău *</label>
+          <textarea id="inpMesaj" placeholder="Scrie mesajul tău aici... Suntem bucuroși să te ajutăm!"></textarea>
+          <div class="form-error">Te rugăm să introduci un mesaj (minim 10 caractere).</div>
+        </div>
+        
+        <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 20px; font-size: 0.875rem; color: var(--text-muted);">
+          <input type="checkbox" id="gdpr" style="margin-top: 3px; accent-color: var(--primary);">
+          <label for="gdpr">Sunt de acord cu <a href="#" style="color: var(--primary);">Politica de Confidențialitate</a> și prelucrarea datelor mele personale. *</label>
+        </div>
+        <div id="grpGdpr" style="display:none; color: #e05252; font-size: 0.8rem; margin-bottom: 12px;">⚠️ Trebuie să accepți termenii pentru a trimite mesajul.</div>
+        
+        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; border: none; font-size: 1rem;">
+          📨 Trimite Mesajul
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- INTREBARI FRECVENTE -->
+  <div style="max-width: 800px; margin: 0 auto; padding: 40px 24px 80px;">
+    <div class="section-header">
+      <h2>Întrebări Frecvente</h2>
+      <div class="separator"></div>
+    </div>
+    <div id="faqList"></div>
+  </div>
+</main>
+
+<script src="produse.js"></script>
+<script src="utils.js"></script>
+<script src="layout.js"></script>
+<script>
+  // DATE
+  const faqs = [
+    { q: "Cât durează livrarea?", a: "Livrăm în 1-3 zile lucrătoare în toată România. Instrumentele mari (tobe, piane) pot necesita 3-5 zile." },
+    { q: "Există livrare gratuită?", a: "Da! Oferim livrare gratuită pentru comenzile de peste 500 lei. Sub această sumă, costul livrării este de 25 lei." },
+    { q: "Pot returna un instrument?", a: "Absolut! Ai 30 de zile de la livrare pentru a returna orice produs în starea originală. Returnarea este gratuită." },
+    { q: "Instrumentele au garanție?", a: "Toate produsele beneficiază de minim 24 luni garanție de la producător. Unele branduri oferă garanție extinsă." },
+    { q: "Oferiți sfaturi pentru alegerea instrumentului?", a: "Cu drag! Poți suna la 0721 234 567 sau scrie pe chat-ul de pe site. Echipa noastră de muzicieni te va ghida." }
+  ];
+  
+  document.getElementById('faqList').innerHTML = faqs.map((faq, i) => `
+    <div style="background:var(--bg-card); border-radius: var(--radius); margin-bottom: 12px; box-shadow: var(--shadow); overflow: hidden;">
+      <button style="width:100%; text-align:left; padding: 20px 24px; font-weight:600; font-size:0.95rem; display:flex; justify-content:space-between; align-items:center; background:transparent; color:var(--text);"
+        onclick="toggleFaq(${i})">
+        ${faq.q}
+        <span id="faqIcon${i}" style="font-size:1.2rem; transition: transform 0.3s;">+</span>
+      </button>
+      <div id="faqAns${i}" style="display:none; padding: 0 24px 20px; color: var(--text-muted); line-height:1.7; font-size:0.9rem;">
+        ${faq.a}
+      </div>
+    </div>`).join('');
+  
+  function toggleFaq(i) {
+    const ans = document.getElementById(`faqAns${i}`);
+    const icon = document.getElementById(`faqIcon${i}`);
+    const isOpen = ans.style.display !== 'none';
+    ans.style.display = isOpen ? 'none' : 'block';
+    icon.textContent = isOpen ? '+' : '−';
+    icon.style.transform = isOpen ? '' : 'rotate(180deg)';
+  }
+
+  // VALIDARE
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    let valid = true;
+    
+    const nume = document.getElementById('inpNume').value.trim();
+    const email = document.getElementById('inpEmail').value.trim();
+    const subiect = document.getElementById('inpSubiect').value;
+    const mesaj = document.getElementById('inpMesaj').value.trim();
+    const gdpr = document.getElementById('gdpr').checked;
+    
+    // VALIDARE
+    const setValid = (id, ok) => {
+      document.getElementById(id).classList.toggle('invalid', !ok);
+      if (!ok) valid = false;
+    };
+    
+    setValid('grpNume', nume.length >= 2);
+    setValid('grpEmail', /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
+    setValid('grpSubiect', subiect !== '');
+    setValid('grpMesaj', mesaj.length >= 10);
+    
+    const gdprWarn = document.getElementById('grpGdpr');
+    if (!gdpr) { gdprWarn.style.display = 'block'; valid = false; }
+    else gdprWarn.style.display = 'none';
+    
+    if (valid) {
+      this.style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    }
+  });
+  
+  // Remove validation on input
+  document.querySelectorAll('#contactForm input, #contactForm textarea, #contactForm select').forEach(el => {
+    el.addEventListener('input', function() {
+      const grp = this.closest('.form-group');
+      if (grp) grp.classList.remove('invalid');
+    });
+  });
+</script>
+</body>
+</html>

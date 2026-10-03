@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Favorite – MelodyShop</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="responsive.css">
+</head>
+<body>
+
+<main>
+  <div class="page-title-bar">
+    <h1>❤️ Produsele Mele Favorite</h1>
+    <p>Instrumentele pe care le-ai salvat pentru mai târziu</p>
+  </div>
+
+  <div class="fav-layout">
+    <div id="favContent"></div>
+  </div>
+</main>
+
+<script src="produse.js"></script>
+<script src="utils.js"></script>
+<script src="layout.js"></script>
+<script>
+  function renderFavorite() {
+    const fav = getFavorite();
+    const container = document.getElementById('favContent');
+    
+    if (fav.length === 0) {
+      container.innerHTML = `
+        <div class="fav-empty">
+          <span>💔</span>
+          <h3>Nicio pianulă favorită deocamdată</h3>
+          <p>Apasă butonul ❤️ de pe orice produs pentru a-l salva aici.</p>
+          <a href="produse.html" class="btn-primary">🎵 Descoperă Instrumente</a>
+        </div>`;
+      return;
+    }
+
+    const produseFav = fav.map(id => produse.find(p => p.id === id)).filter(Boolean);
+    
+    let html = `
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+        <div style="font-size: 0.9rem; color: var(--text-muted);">${produseFav.length} produs${produseFav.length !== 1 ? 'e' : ''} în favorite</div>
+        <button class="btn-clear" onclick="clearFavorite()">🗑️ Șterge toate favoritele</button>
+      </div>`;
+    
+    // Favorites grid with extra actions
+    html += `<div class="cards-grid" id="favGrid">`;
+    produseFav.forEach(p => {
+      const pret = p.pretRedus || p.pret;
+      html += `
+        <div class="card-produs" id="favCard_${p.id}">
+          ${p.popular ? '<span class="badge-popular">⭐ Popular</span>' : ''}
+          ${p.pretRedus ? '<span class="badge-reducere">Sale</span>' : ''}
+          <a href="produs.html?id=${p.id}" class="card-img-link">
+            <img src="${p.imagine}" alt="${p.nume}" class="card-img" loading="lazy">
+          </a>
+          <div class="card-body">
+            <a href="produs.html?id=${p.id}" class="card-titlu">${p.nume}</a>
+            <div class="card-rating">${getRating(p.rating)} <span class="rating-val">${p.rating}</span></div>
+            <p class="card-desc">${p.descriereScurta}</p>
+            <div class="card-pret">
+              ${p.pretRedus ? `<span class="pret-vechi">${formatPret(p.pret)}</span>` : ''}
+              <span class="pret-nou">${formatPret(pret)}</span>
+            </div>
+            <div class="card-actiuni" style="flex-direction: column; gap: 8px;">
+              <button class="btn-cos" onclick="mutaInCosHandler(${p.id})">🛒 Mută în Coș</button>
+              <button style="width:100%; padding: 8px; border: 1px solid #e05252; color: #e05252; border-radius: 8px; font-size: 0.8rem; font-weight: 600; background: transparent; cursor: pointer; transition: all 0.2s;"
+                onmouseover="this.style.background='#fff0f0'"
+                onmouseout="this.style.background='transparent'"
+                onclick="eliminaDinFav(${p.id})">💔 Elimină din Favorite</button>
+            </div>
+          </div>
+        </div>`;
+    });
+    html += `</div>`;
+    
+    container.innerHTML = html;
+  }
+
+  function mutaInCosHandler(id) {
+    mutaInCos(id);
+    showNotif('Produs mutat în coș! 🛒');
+    renderFavorite();
+  }
+
+  function eliminaDinFav(id) {
+    const fav = getFavorite().filter(x => x !== id);
+    salveazaFavorite(fav);
+    showNotif('Eliminat din favorite');
+    renderFavorite();
+  }
+
+  function clearFavorite() {
+    if (confirm('Ești sigur că vrei să ștergi toate favoritele?')) {
+      salveazaFavorite([]);
+      renderFavorite();
+      showNotif('Lista de favorite a fost golită');
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', renderFavorite);
+</script>
+</body>
+</html>

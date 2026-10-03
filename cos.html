@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coș de Cumpărături – MelodyShop</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="responsive.css">
+</head>
+<body>
+
+<main>
+  <div class="page-title-bar">
+    <h1>🛒 Coș de Cumpărături</h1>
+    <p>Verifică produsele selectate și finalizează comanda</p>
+  </div>
+
+  <div class="cos-layout">
+    <div id="cosContent"></div>
+  </div>
+</main>
+
+<script src="produse.js"></script>
+<script src="utils.js"></script>
+<script src="layout.js"></script>
+<script>
+  function renderCos() {
+    const cos = getCos();
+    const container = document.getElementById('cosContent');
+    
+    if (cos.length === 0) {
+      container.innerHTML = `
+        <div class="cos-empty">
+          <span>🛒</span>
+          <h3>Coșul tău este gol</h3>
+          <p>Adaugă instrumente muzicale pentru a continua cumpărăturile.</p>
+          <a href="produse.html" class="btn-primary">🎵 Descoperă Produsele</a>
+        </div>`;
+      return;
+    }
+    
+    let html = '';
+    let total = 0;
+    
+    cos.forEach(item => {
+      const p = produse.find(x => x.id === item.id);
+      if (!p) return;
+      const pret = p.pretRedus || p.pret;
+      const subtotal = pret * item.cantitate;
+      total += subtotal;
+      
+      html += `
+        <div class="cos-item" id="cosItem_${p.id}">
+          <img src="${p.imagine}" alt="${p.nume}" class="cos-img">
+          <div class="cos-info">
+            <h4><a href="produs.html?id=${p.id}">${p.nume}</a></h4>
+            <div class="categoria">${p.categorie}</div>
+            <div style="margin-top: 4px; font-size: 0.85rem; color: var(--text-muted);">
+              Preț/buc: <strong>${formatPret(pret)}</strong>
+              ${p.pretRedus ? `<span style="text-decoration:line-through; margin-left: 6px; color: #aaa;">${formatPret(p.pret)}</span>` : ''}
+            </div>
+          </div>
+          <div class="cos-cantitate">
+            <button class="cant-btn" onclick="schimbaCantitate(${p.id}, -1)">−</button>
+            <input class="cant-nr" type="number" value="${item.cantitate}" min="1" max="${p.stoc}"
+              onchange="setCantitate(${p.id}, parseInt(this.value))">
+            <button class="cant-btn" onclick="schimbaCantitate(${p.id}, 1)">+</button>
+          </div>
+          <div class="cos-pret">${formatPret(subtotal)}</div>
+          <button class="btn-sterge" onclick="stergeItem(${p.id})" title="Șterge din coș">🗑️</button>
+        </div>`;
+    });
+    
+    html += `
+      <div class="cos-footer">
+        <div>
+          <div class="total-text">Total comandă (${cos.length} produs${cos.length !== 1 ? 'e' : ''})</div>
+          <div class="total-sum">${formatPret(total)}</div>
+          <div style="font-size:0.8rem; color: var(--text-muted); margin-top: 4px;">Include TVA. Livrare gratuită peste 500 lei.</div>
+        </div>
+        <div class="cos-btns">
+          <button class="btn-clear" onclick="clearCos()">🗑️ Golește coșul</button>
+          <button class="btn-checkout" onclick="checkout()">✅ Finalizează comanda →</button>
+        </div>
+      </div>`;
+    
+    container.innerHTML = html;
+  }
+
+  function schimbaCantitate(id, delta) {
+    const cos = getCos();
+    const item = cos.find(i => i.id === id);
+    if (!item) return;
+    const p = produse.find(x => x.id === id);
+    const nouaCantitate = item.cantitate + delta;
+    if (nouaCantitate < 1) { stergeItem(id); return; }
+    if (nouaCantitate > p.stoc) { showNotif(`Stoc maxim disponibil: ${p.stoc} bucăți`); return; }
+    updateCantitate(id, nouaCantitate);
+    renderCos();
+  }
+
+  function setCantitate(id, val) {
+    const p = produse.find(x => x.id === id);
+    if (isNaN(val) || val < 1) val = 1;
+    if (val > p.stoc) { val = p.stoc; showNotif(`Stoc maxim: ${p.stoc}`); }
+    updateCantitate(id, val);
+    renderCos();
+  }
+
+  function stergeItem(id) {
+    stergedinCos(id);
+    showNotif('Produs eliminat din coș');
+    renderCos();
+  }
+
+  function clearCos() {
+    if (confirm('Ești sigur că vrei să golești coșul?')) {
+      salveazaCos([]);
+      renderCos();
+      showNotif('Coșul a fost golit');
+    }
+  }
+
+  function checkout() {
+    alert('🎉 Mulțumim pentru comandă!\n\nÎn prezent procesarea plăților online este în lucru. Te vom contacta în curând!\n\nMelodyShop ❤️');
+  }
+
+  document.addEventListener('DOMContentLoaded', renderCos);
+</script>
+</body>
+</html>
